@@ -30,9 +30,29 @@ public class MainActivity extends AppCompatActivity {
     int alarmID0,alarmID1,alarmId2,alarmID3,alarmID4;
     int id;
     String s;
+    Boolean b_cancel0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        CharSequence can_0_text=cancel0.getText();
+        outState.putCharSequence("Cancel",can_0_text);
+        outState.putBoolean("Cancel",b_cancel0);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState!=null)
+        {
+            cancel0.setEnabled(savedInstanceState.getBoolean("Cancel"));
+        }
+    }
+
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -55,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         tv4=findViewById(R.id.tv_alarm4);
 
         ccancel1.setEnabled(false);
-        cancel0.setEnabled(false);
+        cancel0.setEnabled(false); b_cancel0=false;
         cancel2.setEnabled(false);
         cancel3.setEnabled(false);
         cancel4.setEnabled(false);
@@ -69,8 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 alarmID0 = (int) System.currentTimeMillis();
                 intent.putExtra("ID",alarmID0);
                 startActivity(intent);
-                cancel0.setEnabled(true);
+                cancel0.setEnabled(true); b_cancel0=true;
                 alarm0.setText("Edit");
+
             }
         });
 
@@ -128,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 cancelAlarm(alarmID0);
                 alarm0.setText("ADD");
 
-                cancel0.setEnabled(false);
+                cancel0.setEnabled(false); b_cancel0=false;
 
             }
         });
@@ -205,6 +226,8 @@ public class MainActivity extends AppCompatActivity {
             Log.i(TAG, "onCreate: Phone permitted");
         }
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,

@@ -1,25 +1,34 @@
 package com.example.lekshmi.kwa_new;
 
 import android.app.AlarmManager;
+import android.app.ListActivity;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddShift extends AppCompatActivity {
 
     private static final String TAG = "npkTest: AddShift";
 
-    DatePicker pickerDate;
+
     TimePicker pickerTime;
     Button buttonSetAlarm;
     int alarmID,count=0;
@@ -29,6 +38,9 @@ public class AddShift extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_shift);
 
+
+        TextView ph=findViewById(R.id.Phone);
+        final String PhNo=ph.getText().toString();
         Intent i=getIntent();
         Bundle b = i.getExtras();
 
@@ -39,14 +51,10 @@ public class AddShift extends AppCompatActivity {
 
         Calendar now = Calendar.getInstance();
         now.add(Calendar.SECOND, 20);
-        pickerDate = findViewById(R.id.pickerdate);
+
         pickerTime = findViewById(R.id.pickertime);
 
-        pickerDate.init(
-                now.get(Calendar.YEAR),
-                now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH),
-                null);
+
 
         pickerTime.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
         pickerTime.setCurrentMinute(now.get(Calendar.MINUTE));
@@ -58,9 +66,7 @@ public class AddShift extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Calendar cal = Calendar.getInstance();
-                cal.set(pickerDate.getYear(),
-                        pickerDate.getMonth(),
-                        pickerDate.getDayOfMonth(),
+                cal.set(
                         pickerTime.getCurrentHour(),
                         pickerTime.getCurrentMinute(),
                         0);
@@ -70,6 +76,7 @@ public class AddShift extends AppCompatActivity {
 
                 Context context = getApplicationContext();
                 Intent myIntent = new Intent(context, AlarmReceiver.class);
+                myIntent.putExtra("Number",PhNo);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarmID, myIntent, 0);
 
                 assert manager!=null;
@@ -86,4 +93,5 @@ public class AddShift extends AppCompatActivity {
             }
         });
     }
+
 }
