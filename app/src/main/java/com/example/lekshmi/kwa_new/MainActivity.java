@@ -74,21 +74,15 @@ public class MainActivity extends AppCompatActivity {
         tv3=findViewById(R.id.tv_alarm3);
         tv4=findViewById(R.id.tv_alarm4);
 
-        ccancel1.setEnabled(false);
-        cancel0.setEnabled(false); b_cancel0=false;
-        cancel2.setEnabled(false);
-        cancel3.setEnabled(false);
-        cancel4.setEnabled(false);
-
-
 
         alarm0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,AddShift.class);
+               // Intent intent=new Intent(MainActivity.this,AddShift.class);
                 alarmID0 = (int) System.currentTimeMillis();
-                intent.putExtra("ID",alarmID0);
-                startActivity(intent);
+                setAlarm(alarmID0);
+                //intent.putExtra("ID",alarmID0);
+                //startActivity(intent);
                 cancel0.setEnabled(true); b_cancel0=true;
                 alarm0.setText("Edit");
 
@@ -98,10 +92,11 @@ public class MainActivity extends AppCompatActivity {
         alarm1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,AddShift.class);
+                //Intent intent=new Intent(MainActivity.this,AddShift.class);
                 alarmID1 = (int) System.currentTimeMillis();
-                intent.putExtra("ID",alarmID1);
-                startActivity(intent);
+                setAlarm(alarmID1);
+                //intent.putExtra("ID",alarmID1);
+                //startActivity(intent);
                 ccancel1.setEnabled(true);
                 alarm1.setText("Edit");
             }
@@ -110,10 +105,11 @@ public class MainActivity extends AppCompatActivity {
         alarm2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,AddShift.class);
+                //Intent intent=new Intent(MainActivity.this,AddShift.class);
                 alarmId2 = (int) System.currentTimeMillis();
-                intent.putExtra("ID",alarmId2);
-                startActivity(intent);
+                setAlarm(alarmId2);
+                //intent.putExtra("ID",alarmId2);
+               // startActivity(intent);
                cancel2.setEnabled(true);
                 alarm2.setText("Edit");
             }
@@ -122,10 +118,11 @@ public class MainActivity extends AppCompatActivity {
         alarm3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,AddShift.class);
+                //Intent intent=new Intent(MainActivity.this,AddShift.class);
                 alarmID3 = (int) System.currentTimeMillis();
-                intent.putExtra("ID",alarmID3);
-                startActivity(intent);
+                setAlarm(alarmID3);
+                //intent.putExtra("ID",alarmID3);
+                //startActivity(intent);
                 cancel3.setEnabled(true);
                 alarm3.setText("Edit");
             }
@@ -134,10 +131,11 @@ public class MainActivity extends AppCompatActivity {
         alarm4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(MainActivity.this,AddShift.class);
+               // Intent intent=new Intent(MainActivity.this,AddShift.class);
                 alarmID4 = (int) System.currentTimeMillis();
-                intent.putExtra("ID",alarmID4);
-                startActivity(intent);
+                setAlarm(alarmID4);
+                //intent.putExtra("ID",alarmID4);
+                //startActivity(intent);
                 cancel4.setEnabled(true);
                 alarm4.setText("Edit");
             }
@@ -240,6 +238,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, "onRequestPermissionsResult: Permission denied");
             }
         }
+
+    }
+
+    private void setAlarm(int ID)
+    {
+        cancelAlarm(ID);
+
+        Intent intent=new Intent(MainActivity.this,AddShift.class);
+        intent.putExtra("ID",alarmID4);
+        startActivity(intent);
 
     }
 

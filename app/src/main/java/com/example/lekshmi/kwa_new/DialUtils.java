@@ -14,7 +14,7 @@ public class DialUtils
 {
     private static final String TAG = "npkTest: AppUtils";
 
-    static void dial(String number,Context context) {
+    static void dial(String number, String in, Context context) {
         try {
             number = new String(number.trim().replace(" ", "%20").replace("&", "%26")
                     .replace(",", "%2c").replace("(", "%28").replace(")", "%29")
@@ -27,7 +27,10 @@ public class DialUtils
                     .replace("_", "%5F").replace("`", "%60").replace("{", "%7B")
                     .replace("|", "%7C").replace("}", "%7D"));
 
-            Uri uri = Uri.parse("tel:"+ number);
+            String no="tel:"+number+", ,"+in;
+            Uri uri = Uri.parse(no);
+            Toast.makeText(context, uri.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, number, Toast.LENGTH_SHORT).show();
             Intent i = new Intent(Intent.ACTION_CALL, uri);
 
             if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.M

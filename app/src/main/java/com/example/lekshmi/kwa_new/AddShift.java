@@ -31,7 +31,7 @@ public class AddShift extends AppCompatActivity {
 
 
     TimePicker pickerTime;
-    Button buttonSetAlarm;
+    Button Pump_on,Pump_off;
     int alarmID,count=0;
 
     @Override
@@ -40,8 +40,7 @@ public class AddShift extends AppCompatActivity {
         setContentView(R.layout.activity_add_shift);
 
 
-        EditText ph=findViewById(R.id.Phone);
-        final String PhNo=ph.getText().toString();
+
         Intent i=getIntent();
         Bundle b = i.getExtras();
 
@@ -60,8 +59,10 @@ public class AddShift extends AppCompatActivity {
         pickerTime.setCurrentHour(now.get(Calendar.HOUR_OF_DAY));
         pickerTime.setCurrentMinute(now.get(Calendar.MINUTE));
 
-        buttonSetAlarm = findViewById(R.id.setalarm);
-        buttonSetAlarm.setOnClickListener(new View.OnClickListener() {
+        //To turn on the pump
+
+        Pump_on = findViewById(R.id.on);
+        Pump_on.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -73,11 +74,18 @@ public class AddShift extends AppCompatActivity {
                         0);
 
 
+
                 AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
                 Context context = getApplicationContext();
                 Intent myIntent = new Intent(context, AlarmReceiver.class);
+
+                EditText ph=findViewById(R.id.Phone);
+                String PhNo=ph.getText().toString();
+
                 myIntent.putExtra("Number",PhNo);
+                myIntent.putExtra("Input",1);
+
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarmID, myIntent, 0);
 
                 assert manager!=null;
@@ -85,7 +93,55 @@ public class AddShift extends AppCompatActivity {
 
                 manager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
                 Log.i(TAG, "onClick: Shift set for " + cal.getTimeInMillis());
+                Log.v("EditText value=", ph.getText().toString());
                 Toast.makeText(context, "Shift set", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, PhNo, Toast.LENGTH_SHORT).show();
+
+
+
+
+                finish();
+            }
+        });
+
+
+        //To turn off the pump
+
+        Pump_off = findViewById(R.id.off);
+        Pump_off.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Calendar cal = Calendar.getInstance();
+                cal.set(
+                        pickerTime.getCurrentHour(),
+                        pickerTime.getCurrentMinute(),
+                        0);
+
+
+
+                AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+                Context context = getApplicationContext();
+                Intent myIntent = new Intent(context, AlarmReceiver.class);
+
+                EditText ph=findViewById(R.id.Phone);
+                String PhNo=ph.getText().toString();
+
+                myIntent.putExtra("Number",PhNo);
+                myIntent.putExtra("Input",2);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(context, alarmID, myIntent, 0);
+
+                assert manager!=null;
+                //manager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+
+                manager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
+                Log.i(TAG, "onClick: Shift set for " + cal.getTimeInMillis());
+                Log.v("EditText value=", ph.getText().toString());
+                Toast.makeText(context, "Shift set", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, PhNo, Toast.LENGTH_SHORT).show();
 
 
 

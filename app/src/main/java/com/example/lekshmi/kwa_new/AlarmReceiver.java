@@ -18,11 +18,13 @@ public class AlarmReceiver extends BroadcastReceiver {
         Bundle b = intent.getExtras();
         assert b != null;
         String No=b.getString("Number");
+        String in=b.getString("Input");
 
         Log.i(TAG, "onReceive: Making call");
         Toast.makeText(context, "ALARM", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, No, Toast.LENGTH_SHORT).show();
        // AppUtils.makeCall(context,No);
-        DialUtils.dial(No,context);
+        DialUtils.dial(No,in,context);
     }
 
 }

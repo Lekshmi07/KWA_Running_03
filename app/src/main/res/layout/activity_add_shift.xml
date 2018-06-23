@@ -37,19 +37,36 @@
                 android:id="@+id/Phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clickable="false"
                 android:ems="10"
-                android:inputType="phone"
-                android:clickable="true"/>
+                android:inputType="phone" />
 
-            <Button
-                android:id="@+id/setalarm"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginStart="16dp"
-                android:text="Set Alarm"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="488dp" />
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/on"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:text="PUMP ON"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="488dp" />
+
+                <Button
+                    android:id="@+id/off"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:text="PUMP OFF"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="488dp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
