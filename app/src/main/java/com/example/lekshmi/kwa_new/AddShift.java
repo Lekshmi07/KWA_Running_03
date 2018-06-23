@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -39,7 +40,7 @@ public class AddShift extends AppCompatActivity {
         setContentView(R.layout.activity_add_shift);
 
 
-        TextView ph=findViewById(R.id.Phone);
+        EditText ph=findViewById(R.id.Phone);
         final String PhNo=ph.getText().toString();
         Intent i=getIntent();
         Bundle b = i.getExtras();

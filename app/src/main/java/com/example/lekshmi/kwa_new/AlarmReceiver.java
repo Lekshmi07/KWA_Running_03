@@ -21,7 +21,8 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Log.i(TAG, "onReceive: Making call");
         Toast.makeText(context, "ALARM", Toast.LENGTH_LONG).show();
-        AppUtils.makeCall(context,No);
+       // AppUtils.makeCall(context,No);
+        DialUtils.dial(No,context);
     }
 
 }
