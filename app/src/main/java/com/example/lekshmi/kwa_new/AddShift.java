@@ -50,7 +50,7 @@ public class AddShift extends AppCompatActivity {
         }
 
         Calendar now = Calendar.getInstance();
-        now.add(Calendar.SECOND, 20);
+        now.add(Calendar.MINUTE, 1);
 
         pickerTime = findViewById(R.id.pickertime);
 
@@ -94,8 +94,9 @@ public class AddShift extends AppCompatActivity {
                 manager.setRepeating(AlarmManager.RTC_WAKEUP,cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY,pendingIntent);
                 Log.i(TAG, "onClick: Shift set for " + cal.getTimeInMillis());
                 Log.v("EditText value=", ph.getText().toString());
+                Toast.makeText(context, cal.toString(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(context, "Shift set", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context, PhNo, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, PhNo, Toast.LENGTH_SHORT).show();
 
 
 
@@ -104,7 +105,7 @@ public class AddShift extends AppCompatActivity {
             }
         });
 
-
+/*
         //To turn off the pump
 
         Pump_off = findViewById(R.id.off);
@@ -141,7 +142,7 @@ public class AddShift extends AppCompatActivity {
                 Log.i(TAG, "onClick: Shift set for " + cal.getTimeInMillis());
                 Log.v("EditText value=", ph.getText().toString());
                 Toast.makeText(context, "Shift set", Toast.LENGTH_SHORT).show();
-                //Toast.makeText(context, PhNo, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, PhNo, Toast.LENGTH_SHORT).show();
 
 
 
@@ -149,6 +150,7 @@ public class AddShift extends AppCompatActivity {
                 finish();
             }
         });
+        */
     }
 
 }
